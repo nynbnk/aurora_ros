@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include <cmath>
 #include <memory>
-#include <cv_bridge/cv_bridge.h>
+#include <cv_bridge/cv_bridge.hpp>
 
 namespace slamware_ros_sdk {
 

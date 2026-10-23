@@ -143,6 +143,15 @@ install(TARGETS ${PROJECT_NAME}_server_node
   DESTINATION lib/${PROJECT_NAME}
 )
 
+# The node links the vendor library by absolute path, so the build-tree
+# RPATH is dropped at install time and the installed node cannot find it.
+# Installing the library into lib/ puts it on the LD_LIBRARY_PATH that
+# sourcing this package's setup adds, so no shell needs to point at the
+# source tree.
+install(FILES ${AURORA_LIB_PATH}/lib${AURORA_LIB_NAME}.so
+  DESTINATION lib
+)
+
 install(DIRECTORY include/${PROJECT_NAME}/
 	DESTINATION include/${PROJECT_NAME}
   FILES_MATCHING PATTERN "*.h"

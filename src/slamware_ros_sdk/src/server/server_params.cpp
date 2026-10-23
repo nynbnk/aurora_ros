@@ -47,6 +47,12 @@ namespace slamware_ros_sdk {
         this->declare_parameter<float>("system_status_pub_period", 0.1f);
         this->declare_parameter<float>("stereo_image_pub_period", 0.05f);
         this->declare_parameter<float>("point_cloud_pub_period", 0.2f);
+        // Read by the server but never declared upstream, so getParameter()
+        // returned 0 s and the work loop never slept: the state publisher and
+        // the enhanced-imaging poller ran on every pass (about 4 kHz, a full
+        // core). Declared with sane defaults; the periods stay overridable.
+        this->declare_parameter<float>("robot_basic_state_pub_period", 1.0f);
+        this->declare_parameter<float>("enhanced_imaging_pub_period", 0.02f);
 
         this->declare_parameter<std::string>("scan_topic", "/slamware_ros_sdk_server_node/scan");
         this->declare_parameter<std::string>("robot_pose_topic", "/slamware_ros_sdk_server_node/robot_pose");
